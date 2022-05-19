@@ -14,6 +14,13 @@
 		09A68A132833120D0072E9E2 /* lizardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A68A122833120D0072E9E2 /* lizardTests.swift */; };
 		09A68A1D2833120D0072E9E2 /* lizardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A68A1C2833120D0072E9E2 /* lizardUITests.swift */; };
 		09A68A1F2833120D0072E9E2 /* lizardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A68A1E2833120D0072E9E2 /* lizardUITestsLaunchTests.swift */; };
+		09A68A2C283312A80072E9E2 /* ColorSchemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A68A2B283312A80072E9E2 /* ColorSchemes.swift */; };
+		09A68A2E283316870072E9E2 /* TshirtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A68A2D283316870072E9E2 /* TshirtView.swift */; };
+		09A68A3028331E670072E9E2 /* Shirt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A68A2F28331E670072E9E2 /* Shirt.swift */; };
+		09D31DB628347673001DBD09 /* UIBezierPath+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D31DB528347673001DBD09 /* UIBezierPath+Extension.swift */; };
+		09D31DB828347679001DBD09 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D31DB728347679001DBD09 /* UIColor+extension.swift */; };
+		09D31DBB283476C9001DBD09 /* ShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D31DBA283476C9001DBD09 /* ShapeView.swift */; };
+		09D31DBD283478C7001DBD09 /* SVGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D31DBC283478C7001DBD09 /* SVGView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +51,13 @@
 		09A68A182833120D0072E9E2 /* lizardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lizardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09A68A1C2833120D0072E9E2 /* lizardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lizardUITests.swift; sourceTree = "<group>"; };
 		09A68A1E2833120D0072E9E2 /* lizardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lizardUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		09A68A2B283312A80072E9E2 /* ColorSchemes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemes.swift; sourceTree = "<group>"; };
+		09A68A2D283316870072E9E2 /* TshirtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TshirtView.swift; sourceTree = "<group>"; };
+		09A68A2F28331E670072E9E2 /* Shirt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shirt.swift; sourceTree = "<group>"; };
+		09D31DB528347673001DBD09 /* UIBezierPath+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Extension.swift"; sourceTree = "<group>"; };
+		09D31DB728347679001DBD09 /* UIColor+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
+		09D31DBA283476C9001DBD09 /* ShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeView.swift; sourceTree = "<group>"; };
+		09D31DBC283478C7001DBD09 /* SVGView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +110,11 @@
 			children = (
 				09A68A012833120B0072E9E2 /* lizardApp.swift */,
 				09A68A032833120B0072E9E2 /* ContentView.swift */,
-				09A68A052833120D0072E9E2 /* Assets.xcassets */,
+				09A68A2D283316870072E9E2 /* TshirtView.swift */,
+				09A68A2B283312A80072E9E2 /* ColorSchemes.swift */,
+				09A68A2F28331E670072E9E2 /* Shirt.swift */,
+				09D31DBC283478C7001DBD09 /* SVGView.swift */,
+				09D31DB928347688001DBD09 /* ExternalResources */,
 				09A68A072833120D0072E9E2 /* Preview Content */,
 			);
 			path = lizard;
@@ -105,6 +123,7 @@
 		09A68A072833120D0072E9E2 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				09A68A052833120D0072E9E2 /* Assets.xcassets */,
 				09A68A082833120D0072E9E2 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -125,6 +144,16 @@
 				09A68A1E2833120D0072E9E2 /* lizardUITestsLaunchTests.swift */,
 			);
 			path = lizardUITests;
+			sourceTree = "<group>";
+		};
+		09D31DB928347688001DBD09 /* ExternalResources */ = {
+			isa = PBXGroup;
+			children = (
+				09D31DB728347679001DBD09 /* UIColor+extension.swift */,
+				09D31DB528347673001DBD09 /* UIBezierPath+Extension.swift */,
+				09D31DBA283476C9001DBD09 /* ShapeView.swift */,
+			);
+			path = ExternalResources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,6 +244,8 @@
 				Base,
 			);
 			mainGroup = 09A689F52833120B0072E9E2;
+			packageReferences = (
+			);
 			productRefGroup = 09A689FF2833120B0072E9E2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -257,7 +288,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09A68A2E283316870072E9E2 /* TshirtView.swift in Sources */,
 				09A68A042833120B0072E9E2 /* ContentView.swift in Sources */,
+				09A68A2C283312A80072E9E2 /* ColorSchemes.swift in Sources */,
+				09D31DB828347679001DBD09 /* UIColor+extension.swift in Sources */,
+				09D31DB628347673001DBD09 /* UIBezierPath+Extension.swift in Sources */,
+				09A68A3028331E670072E9E2 /* Shirt.swift in Sources */,
+				09D31DBD283478C7001DBD09 /* SVGView.swift in Sources */,
+				09D31DBB283476C9001DBD09 /* ShapeView.swift in Sources */,
 				09A68A022833120B0072E9E2 /* lizardApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
