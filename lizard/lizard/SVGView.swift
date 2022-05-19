@@ -12,8 +12,11 @@ struct SVGView: View {
     @State var endAmount: CGFloat = 0
     @State var isFilled: Bool = false
     
-    let primary = UIColor.fromHexString("29ABE2")
-    let secondary = UIColor.fromHexString("0A62BC")
+//    let primary = UIColor.fromHexString("29ABE2")
+    let primary = UIColor.fromHexString("ff21f8")
+    let secondary = UIColor.fromHexString("#ff79f8")
+//    let secondary = .white
+
     let tertiary = UIColor.fromHexString("29ABE2")
     let pathBounds = UIBezierPath.calculateBounds(paths: [
 //        .ctLogo1, .ctLogo2,
@@ -37,7 +40,7 @@ struct SVGView: View {
             ShapeView(bezier: .finalHorns, pathBounds: pathBounds)
                 .fill(Color(primary)).opacity(isFilled ? 1 : 0)
             ShapeView(bezier: .finalScreen, pathBounds: pathBounds)
-                .fill(Color(.white))
+                .fill(Color(secondary)).opacity(isFilled ? 1 : 0)
             
             ShapeView(bezier: .finalHorns, pathBounds: pathBounds)
                         .trim(from: 0, to: endAmount)
@@ -62,8 +65,8 @@ struct SVGView: View {
             }
             withAnimation(
 //                Animation.easeInOut.delay(2)
+//                Animation.easeInOut(duration: 4)
                 Animation.easeInOut(duration: 4)
-//                Animation.easeInOut(duration: 5).delay(2)
             ){
                 self.isFilled = true
             }
