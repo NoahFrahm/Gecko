@@ -172,6 +172,8 @@
 			dependencies = (
 			);
 			name = lizard;
+			packageProductDependencies = (
+			);
 			productName = lizard;
 			productReference = 09A689FE2833120B0072E9E2 /* lizard.app */;
 			productType = "com.apple.product-type.application";

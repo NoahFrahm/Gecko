@@ -20,7 +20,9 @@ struct SVGView: View {
 //            .AppTeam2,
 //            .AppTeam2
 //        .AppTeam3
-                .testShapeY
+//                .testShapeZ
+//        .floopy2
+        .tryLogo4
     ])
     
     var body: some View {
@@ -32,29 +34,40 @@ struct SVGView: View {
 //                .trim(from: 0, to: endAmount)
 //                .stroke(Color(secondary), lineWidth: 2)
 
-            ShapeView(bezier: .testShapeY, pathBounds: pathBounds)
-                .fill(Color(primary))
+            ShapeView(bezier: .finalHorns, pathBounds: pathBounds)
+                .fill(Color(primary)).opacity(isFilled ? 1 : 0)
+            ShapeView(bezier: .finalScreen, pathBounds: pathBounds)
+                .fill(Color(.white))
+            
+            ShapeView(bezier: .finalHorns, pathBounds: pathBounds)
+                        .trim(from: 0, to: endAmount)
+                        .stroke(Color(primary), lineWidth: 2)
+            ShapeView(bezier: .finalScreen, pathBounds: pathBounds)
+                        .trim(from: 0, to: endAmount)
+                        .stroke(Color(primary), lineWidth: 2)
+            
+            
             
 //            ShapeView(bezier: .ctLogo1, pathBounds: pathBounds)
 //                .fill(Color(primary)).opacity(isFilled ? 1 : 0)
 //            ShapeView(bezier: .ctLogo2, pathBounds: pathBounds)
 //                .fill(Color(secondary)).opacity(isFilled ? 1 : 0)
         }
-        .frame(width: 50, height: 200)
-//        .onAppear{
-//            self.isFilled = false
-//            self.endAmount = 0
-//            withAnimation(.easeInOut(duration: 2)){
-//                self.endAmount = 1
-//            }
-//            withAnimation(
-////                Animation.easeInOut.delay(2)
-//                Animation.easeInOut(duration: 3)
-////                Animation.easeInOut(duration: 5).delay(2)
-//            ){
-//                self.isFilled = true
-//            }
-//        }
+        .frame(width: 100, height: 400)
+        .onAppear{
+            self.isFilled = false
+            self.endAmount = 0
+            withAnimation(.easeInOut(duration: 2)){
+                self.endAmount = 1
+            }
+            withAnimation(
+//                Animation.easeInOut.delay(2)
+                Animation.easeInOut(duration: 4)
+//                Animation.easeInOut(duration: 5).delay(2)
+            ){
+                self.isFilled = true
+            }
+        }
     }
 }
 
