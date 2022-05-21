@@ -14,8 +14,8 @@ struct SVGView: View {
     
 //    let primary = UIColor.fromHexString("29ABE2")
     let primary = UIColor.fromHexString("ff21f8")
-    let secondary = UIColor.fromHexString("#ff79f8")
-//    let secondary = .white
+//    let secondary = UIColor.fromHexString("#ff79f8")
+    let secondary: UIColor = .white
 
     let tertiary = UIColor.fromHexString("29ABE2")
     let pathBounds = UIBezierPath.calculateBounds(paths: [
@@ -25,7 +25,9 @@ struct SVGView: View {
 //        .AppTeam3
 //                .testShapeZ
 //        .floopy2
-        .tryLogo4
+//        .finalHorns
+        .phone_radius,
+        .horns_radius
     ])
     
     var body: some View {
@@ -37,17 +39,29 @@ struct SVGView: View {
 //                .trim(from: 0, to: endAmount)
 //                .stroke(Color(secondary), lineWidth: 2)
 
-            ShapeView(bezier: .finalHorns, pathBounds: pathBounds)
+            ShapeView(bezier: .horns_radius, pathBounds: pathBounds)
                 .fill(Color(primary)).opacity(isFilled ? 1 : 0)
-            ShapeView(bezier: .finalScreen, pathBounds: pathBounds)
+            ShapeView(bezier: .phone_radius, pathBounds: pathBounds)
                 .fill(Color(secondary)).opacity(isFilled ? 1 : 0)
             
-            ShapeView(bezier: .finalHorns, pathBounds: pathBounds)
+            ShapeView(bezier: .horns_radius, pathBounds: pathBounds)
                         .trim(from: 0, to: endAmount)
                         .stroke(Color(primary), lineWidth: 2)
-            ShapeView(bezier: .finalScreen, pathBounds: pathBounds)
+            ShapeView(bezier: .phone_radius, pathBounds: pathBounds)
                         .trim(from: 0, to: endAmount)
                         .stroke(Color(primary), lineWidth: 2)
+//            pink
+//            ShapeView(bezier: .finalHorns, pathBounds: pathBounds)
+//                .fill(Color(primary)).opacity(isFilled ? 1 : 0)
+//            ShapeView(bezier: .finalScreen, pathBounds: pathBounds)
+//                .fill(Color(secondary)).opacity(isFilled ? 1 : 0)
+//
+//            ShapeView(bezier: .finalHorns, pathBounds: pathBounds)
+//                        .trim(from: 0, to: endAmount)
+//                        .stroke(Color(primary), lineWidth: 2)
+//            ShapeView(bezier: .finalScreen, pathBounds: pathBounds)
+//                        .trim(from: 0, to: endAmount)
+//                        .stroke(Color(primary), lineWidth: 2)
             
             
             
@@ -66,7 +80,7 @@ struct SVGView: View {
             withAnimation(
 //                Animation.easeInOut.delay(2)
 //                Animation.easeInOut(duration: 4)
-                Animation.easeInOut(duration: 4)
+                Animation.easeInOut(duration: 3)
             ){
                 self.isFilled = true
             }
