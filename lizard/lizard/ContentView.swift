@@ -14,10 +14,10 @@ struct ContentView: View {
                 .tabItem {
                     Label("Menu", systemImage: "list.dash")
                 }
-            SVGView()
-                .tabItem {
-                    Label("SVG", systemImage: "list.dash")
-                }
+//            SVGView()
+//                .tabItem {
+//                    Label("SVG", systemImage: "list.dash")
+//                }
         }
     }
 }

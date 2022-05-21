@@ -15,13 +15,17 @@ struct colorScheme: Hashable{
     
     let id = UUID()
     var name = "none"
-    var primary: Color = .white
-    var secondary: Color = .purple
-    var tertiary: Color = .yellow
+    
+    
+    var primary: UIColor = .white
+    var secondary: UIColor = .purple
+    var tertiary: UIColor = .yellow
 }
 
 let myColorSchemes: [colorScheme] = [
-    colorScheme(name: "chosen", primary: .white, secondary: .purple, tertiary: .yellow),
-    colorScheme(name: "agent", primary: .purple, secondary: .yellow, tertiary: .white),
-    colorScheme(name: "bat", primary: .black, secondary: .yellow, tertiary: .orange),
+    colorScheme(name: "chosen", primary: UIColor(.white), secondary: UIColor(.purple), tertiary: UIColor(.yellow)),
+    colorScheme(name: "agent", primary: UIColor(.purple), secondary: UIColor(.yellow), tertiary: UIColor(.white)),
+    colorScheme(name: "bat", primary: UIColor(.black), secondary: UIColor(.yellow), tertiary: UIColor(.orange)),
+    colorScheme(name: "pink", primary: UIColor.fromHexString("#ff21f8"), secondary: UIColor.fromHexString("#ff79f8"), tertiary: UIColor.fromHexString("#ff79f8")),
+    colorScheme(name: "blue", primary: UIColor(.black), secondary: UIColor(.yellow), tertiary: UIColor(.orange)),
 ]
