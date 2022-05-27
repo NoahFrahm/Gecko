@@ -39,7 +39,7 @@ struct TshirtView: View {
                 )
                 
                 Spacer()
-            }
+            }.ignoresSafeArea(edges: .bottom)
 //        }
     }
 }

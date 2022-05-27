@@ -84,7 +84,7 @@ struct SVGView: View {
                 self.endAmount = 0
                 self.phoneFilled = false
                 
-                withAnimation(.easeInOut(duration: 2)){
+                withAnimation(.easeInOut(duration: 2.5)){
                     self.endAmount = 1
                 }
                 
@@ -102,7 +102,7 @@ struct SVGView: View {
                 }
             }
             .onAppear{
-                withAnimation(.easeInOut(duration: 2)){
+                withAnimation(.easeInOut(duration: 2.5)){
                     self.endAmount = 1
                 }
                 
