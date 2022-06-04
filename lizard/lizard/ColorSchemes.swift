@@ -23,8 +23,8 @@ struct colorScheme: Hashable{
 }
 
 let myColorSchemes: [colorScheme] = [
-    colorScheme(name: "chosen", primary: UIColor(.white), secondary: UIColor(.purple), tertiary: UIColor(.yellow)),
-    colorScheme(name: "agent", primary: UIColor(.purple), secondary: UIColor(.yellow), tertiary: UIColor(.white)),
+//    colorScheme(name: "chosen", primary: UIColor(.white), secondary: UIColor(.purple), tertiary: UIColor(.yellow)),
+//    colorScheme(name: "agent", primary: UIColor(.purple), secondary: UIColor(.yellow), tertiary: UIColor(.white)),
     colorScheme(name: "bat", primary: UIColor(.black), secondary: UIColor(.yellow), tertiary: UIColor(.orange)),
     colorScheme(name: "pink", primary: UIColor.fromHexString("#ff21f8"), secondary: UIColor.fromHexString("#ff79f8"), tertiary: UIColor.fromHexString("#ff79f8")),
     colorScheme(name: "blue", primary: UIColor(.black), secondary: UIColor(.yellow), tertiary: UIColor(.orange)),
