@@ -1,6 +1,7 @@
 # gecko
 work with swift ui animations and color schemes
 
-<div align="center">
-    <img src="./resources//Screen%20Recording%202022-06-03%20at%207.09.25%20PM.gif" width=50px/>
-</div>
+
+
+https://user-images.githubusercontent.com/69765035/171974442-b8b99328-efd6-4d03-87e8-e084cd876307.mov
+
