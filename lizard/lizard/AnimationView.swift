@@ -12,9 +12,6 @@ struct AnimationView: View {
     @State var isFilled: Bool = false
     @State var phoneFilled: Bool = false
     
-//    @State var animate: colorScheme
-//    300 is our image size
-    
     var primary: UIColor = myColorSchemes[0].primary
     var secondary: UIColor = myColorSchemes[0].secondary
     var tertiary: UIColor = myColorSchemes[0].tertiary
@@ -23,70 +20,134 @@ struct AnimationView: View {
     var appRounding: CGFloat = CGFloat(8)
     var logoSize: CGFloat = CGFloat(300)
     var appSpacing: CGFloat = CGFloat(5)
+    var logoColor: Color = .blue
     
     var screenWidth = UIScreen.main.bounds.width
     var screenHeight = UIScreen.main.bounds.height
     
-    let background: Color = .white
+    let background: Color = .yellow
+    var screenColor: Color = .orange
+    
+    //vars for flash animation
+    @State var crunch_height = false
+    @State var crunch_width = false
+    @State var blackout = false
+    @State var flash = false
+
     let pathBounds = UIBezierPath.calculateBounds(paths: [
         .final_logo_horns,
-//        .final_logo_phone
     ])
     
     @State var pushVal: CGFloat = CGFloat(0)
-    
-//    magic piece of code
-//    ShapeWithHole(backy: pathBounds)
-//        .frame(width: 300, height: 300)
     
     
     var body: some View {
         VStack{
             ZStack{
-                Color.white
+                background
+                //this vstack contains the screens
                 VStack{
                     RoundedRectangle(cornerRadius: 0)
                         .foregroundColor(.clear)
                         .frame(width: 2, height: 40)
-                    HStack(spacing: 0){
-                        Rectangle()
-                            .foregroundColor(.clear)
-                            .frame(width: 88, height: 20)
-                        screen()
-                        screen()
-                        Rectangle()
-                            .foregroundColor(.clear)
-                            .frame(width: pushVal, height: 20)
+                    ZStack{
+                        //this hstack has the two screens and rectangles that we use
+                        //to push screens left to right
+                        HStack(spacing: 0){
+                            Rectangle()
+                                .foregroundColor(.clear)
+                                .frame(width: 88, height: 20)
+                            screen(backCol: screenColor)
+                            screen(backCol: screenColor)
+                            Rectangle()
+                                .foregroundColor(.clear)
+                                .frame(width: pushVal, height: 20)
+                        }
+                            .frame(width: screenWidth, height: 400)
+                        //this vstack contains the static bottom row of apps that don't slide
+                        //on swipe
+                        VStack{
+                            Spacer()
+                            HStack(alignment: .center, spacing: 5){
+                                AppIconView(appSize: appSize, appRounding: appRounding)
+                                AppIconView(appSize: appSize, appRounding: appRounding)
+                                    .padding([.trailing], 10)
+                            }
+                        }
+                        .frame(width: logoSize/3, height: logoSize*0.6)
                     }
-                    .frame(width: screenWidth, height: 400)
                 }
-                ShapeWithHole(backy: pathBounds)
-                    .frame(width: 300, height: 300)
-//                left right blocking rects
+                //this is the screen flash
+                VStack{
+                    RoundedRectangle(cornerRadius: 0)
+                        .foregroundColor(.clear)
+                        .frame(width: 20, height: 10)
+                    ZStack{
+                        //full black
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(.black)
+                            .frame(width: logoSize, height: logoSize*0.75)
+                            .opacity(flash ? 1 : 0)
+                        //full white
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(.white)
+                            .frame(width: crunch_width ? 10: logoSize, height: crunch_height ? 10: logoSize*0.75)
+                            .opacity(flash ? 1 : 0)
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(blackout ? .black : .clear)
+                            .frame(width: logoSize, height: logoSize*0.75)
+                    }
+                }
+                    
+                //hstack with left right blocking rects to hide the screens
                 HStack{
                     Rectangle()
-                        .foregroundColor(.white)
+                        .foregroundColor(background)
                         .frame(width: 143, height: 400)
                     Spacer()
                     Rectangle()
-                        .foregroundColor(.white)
+                        .foregroundColor(background)
                         .frame(width: 146, height: 400)
                 }
+                //this is the horns logo with a hole cut out of the center
                 ShapeWithHole(backy: pathBounds)
-                    .frame(width: 300, height: 300)
+                    .foregroundColor(logoColor)
+                    .frame(width: logoSize, height: logoSize)
                 
             }.ignoresSafeArea()
-            Button(action: {
-                withAnimation(){
-                    if (pushVal > 0){
-                        pushVal = 0
+            HStack{
+                //this button animates the screen swipe
+                Button(action: {
+                    withAnimation(){
+                        if (pushVal > 0){
+                            pushVal = 0
+                        }
+                        else {
+                            self.pushVal = 200
+                        }
                     }
-                    else {
-                        self.pushVal = 200
-                    }
+                }) {
+                    Text("swipe")
                 }
-            }) {
-                Text("swipe")
+                Button(action: {
+                    let delaying = 0.3
+                    withAnimation{
+                        self.flash.toggle()
+                    }
+                    withAnimation(.easeIn.delay(delaying)){
+                        self.crunch_height.toggle()
+                    }
+                    withAnimation(.easeIn.delay(0.1 + delaying)){
+                        self.crunch_width.toggle()
+                    }
+                    withAnimation(.easeIn.delay(0.2 + delaying)){
+                        self.blackout.toggle()
+                    }
+                    
+                }) {
+                    Text("flash")
+                }
+                
             }
         }
     }
@@ -134,7 +195,7 @@ struct screen: View {
     var appRounding: CGFloat = CGFloat(8)
     var logoSize: CGFloat = CGFloat(300)
     var appSpacing: CGFloat = CGFloat(5)
-    var backCol: Color = .purple
+    var backCol: Color = .blue
 
     var body: some View {
         ZStack{
@@ -151,7 +212,7 @@ struct screen: View {
             }
             .frame(width: 300, height: 300)
             VStack(){
-                ForEach(0..<4){ _ in
+                ForEach(0..<3){ _ in
                     HStack(spacing: appSpacing){
                         ForEach(0..<3){ _ in
                             AppIconView(appSize: appSize, appRounding: appRounding)
@@ -169,15 +230,6 @@ struct screen: View {
                     
                 }
                 .padding([.trailing, .leading])
-                
-//                    this is the bottom row apps we need to move them out into another rect
-//                    HStack(spacing: appSpacing){
-//                        ForEach(0..<2){ _ in
-//                            AppIconView(appSize: appSize, appRounding: appRounding)
-//                        }
-//                    }
-//                    .padding([.top,.bottom])
-                
             }
             .padding([.top, .bottom], 20)
             .frame(width: (logoSize)/3, height: (logoSize)*0.8, alignment: .top)
