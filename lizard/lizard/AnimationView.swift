@@ -20,25 +20,34 @@ struct AnimationView: View {
     var appRounding: CGFloat = CGFloat(8)
     var logoSize: CGFloat = CGFloat(300)
     var appSpacing: CGFloat = CGFloat(5)
-    var logoColor: Color = .blue
+    @State var logoColor: Color = Color(red: 83/255, green: 64/255, blue: 177/255)
+//    Color(red: 148, green: 131, blue: 249)
+    
+    var darkPurp: Color = Color(red: 83/255, green: 64/255, blue: 177/255)
+    var lightPurp: Color = Color(red: 148, green: 131, blue: 249)
+    var darkGray: Color = Color(red: 25/255, green: 25/255, blue: 25/255)
+    var darkPink: Color = Color(red: 255/255, green: 0/255, blue: 153/255)
+    var lightPink: Color = Color(red: 255/255, green: 118/255, blue: 209/255)
     
     var screenWidth = UIScreen.main.bounds.width
     var screenHeight = UIScreen.main.bounds.height
     
-    let background: Color = .yellow
-    var screenColor: Color = .orange
+    @State var background: Color = Color(red: 148/255, green: 131/255, blue: 249/255)
+    @State var screenColor: Color = Color(red: 148/255, green: 131/255, blue: 249/255)
     
-    //vars for flash animation
-    @State var crunch_height = false
-    @State var crunch_width = false
-    @State var blackout = false
-    @State var flash = false
-
     let pathBounds = UIBezierPath.calculateBounds(paths: [
         .final_logo_horns,
     ])
     
+    //vars for flash and swipe animation
+    @State var crunch_height = false
+    @State var crunch_width = false
+    @State var blackout = false
+    @State var flash = false
     @State var pushVal: CGFloat = CGFloat(0)
+    @State var loadingBar: CGFloat = CGFloat(1)
+    @State var showLoad = false
+    @State var blast = false
     
     
     var body: some View {
@@ -96,6 +105,34 @@ struct AnimationView: View {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundColor(blackout ? .black : .clear)
                             .frame(width: logoSize, height: logoSize*0.75)
+                        
+                        //loading bar
+//                        similar to screen
+//                        try with stroke or % fill
+                        VStack(alignment: .leading){
+                            HStack{
+                                Rectangle()
+                                    .foregroundColor(.clear)
+                                    .frame(width: 100, height: 25)
+                            }
+                            ZStack(alignment: .leading){
+                                RoundedRectangle(cornerRadius: 6)
+                                    .foregroundColor(Color(red: 25/255, green: 25/255, blue: 25/255))
+                                    .frame(width: 76, height: 5)
+                                    .padding(.leading, 6)
+                                RoundedRectangle(cornerRadius: 6)
+                                    .foregroundColor(.white)
+                                    .frame(width: loadingBar, height: 5)
+                                    .padding(.leading, 6)
+                            }
+                            Spacer()
+                        }
+                        .opacity(showLoad ? 1:0)
+                        .frame(width: 90, height: 50)
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(lightPink)
+                            .frame(width: logoSize, height: logoSize*0.75)
+                            .opacity(blast ? 1 : 0)
                     }
                 }
                     
@@ -116,7 +153,28 @@ struct AnimationView: View {
                 
             }.ignoresSafeArea()
             HStack{
-                //this button animates the screen swipe
+                //this button animates the loading bar
+                Button(action: {
+                    withAnimation(.easeIn(duration: 3)){
+                        loadingBar = 34
+                    }
+                    withAnimation(.linear(duration: 1.5).delay(3)){
+                        loadingBar = 52
+                    }
+                    withAnimation(.easeIn(duration: 0.5).delay(4.5)){
+                        loadingBar = 76
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
+                        blast = true
+                        self.screenColor = lightPink
+                        self.background =  lightPink
+                        self.logoColor = darkPink
+                        
+                    }
+                    
+                }){
+                    Text("load")
+                }
                 Button(action: {
                     withAnimation(){
                         if (pushVal > 0){
@@ -129,21 +187,27 @@ struct AnimationView: View {
                 }) {
                     Text("swipe")
                 }
+                //this button animates screen flash
                 Button(action: {
-                    let delaying = 0.3
+                    let delaying = 0.0
+                    self.flash.toggle()
+                    
                     withAnimation{
-                        self.flash.toggle()
+                        self.background = .black
+                        self.logoColor = Color(red: 25/255, green: 25/255, blue: 25/255)
                     }
                     withAnimation(.easeIn.delay(delaying)){
                         self.crunch_height.toggle()
                     }
-                    withAnimation(.easeIn.delay(0.1 + delaying)){
+                    withAnimation(.easeIn.delay(0.05 + delaying)){
                         self.crunch_width.toggle()
                     }
-                    withAnimation(.easeIn.delay(0.2 + delaying)){
+                    withAnimation(.easeIn.delay(0.1 + delaying)){
                         self.blackout.toggle()
                     }
-                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self.showLoad.toggle()
+                    }
                 }) {
                     Text("flash")
                 }
@@ -153,11 +217,15 @@ struct AnimationView: View {
     }
 }
 
+
+//rounded rectangle phone then logo screen then horns grow
+
 struct AnimationView_Previews: PreviewProvider {
     static var previews: some View {
         AnimationView()
     }
 }
+
 
 extension Path {
     var reversed: Path {
@@ -167,6 +235,7 @@ extension Path {
         return Path(reversedCGPath)
     }
 }
+
 
 struct ShapeWithHole: Shape {
     
@@ -245,7 +314,7 @@ struct AppIconView: View {
     
     var appSize: CGFloat
     var appRounding: CGFloat
-    var appColor: Color = .black
+    var appColor: Color = Color(red: 83/255, green: 64/255, blue: 177/255)
     
     var body: some View {
         RoundedRectangle(cornerRadius: appRounding)
