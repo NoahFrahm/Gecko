@@ -31,6 +31,14 @@ struct CleanedUpAnimationView: View {
         .final_logo_horns,
     ])
     
+    let gradient = Gradient(
+            stops: [
+                .init(color: .green.opacity(0.4), location: 0),
+                .init(color: .green.opacity(0.5), location: 0.7),
+                .init(color: .green.opacity(0), location: 1),
+            ]
+        )
+    
     //vars for flash and swipe animation
     @State var crunch_height = false
     @State var crunch_width = false
@@ -125,12 +133,36 @@ struct CleanedUpAnimationView: View {
                 ShapeWithHole(backy: pathBounds)
                     .foregroundColor(logoColor)
                     .frame(width: logoSize, height: logoSize)
+                
+                VStack(alignment: .leading){
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .frame(width: logoSize*0.65, height: 553)
+                    HStack{
+                    Trapezoid(percent: 41 )
+                        .fill(
+                            LinearGradient(
+                                colors: [lightPink, .black],
+                                startPoint: .top,
+                                endPoint: .bottom)
+                        )
+                        .frame(width: logoSize * 2, height: 300)
+                        .opacity(drop ? 1:0)
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .frame(width: 1, height: 1)
+                    }
+                }
+                .frame(width: logoSize/3, height: 700)
             }
             .ignoresSafeArea()
+            
+            
             
             HStack{
                 //this button animates the loading bar
                 Button(action: {
+                    let delay = CGFloat(0.9)
 //                    withAnimation(.easeIn(duration: 3)){
 //                        loadingBar = 34
 //                    }
@@ -147,6 +179,7 @@ struct CleanedUpAnimationView: View {
 //                        self.logoColor = darkPink
 //
 //                    }
+                    
                     withAnimation(.easeIn(duration: 1)){
                         loadingBar = 76
                     }
@@ -158,6 +191,18 @@ struct CleanedUpAnimationView: View {
 //                        self.logoColor = darkPink
                         
                     }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {self.drop.toggle()
+                        
+                    }
+                    withAnimation(.linear(duration: 0).delay(0 + delay)){
+                        self.expand.toggle()
+                    }
+//                    withAnimation(.easeIn(duration: 1).delay(0.1 + delay)){
+//                        self.background = lightPink
+//                    }
+//                    withAnimation(.easeIn(duration: 1).delay(0.1 + delay)){
+//                        self.logoColor = darkPink
+//                    }
                     
                 }){
                     Text("load")
@@ -201,31 +246,39 @@ struct CleanedUpAnimationView: View {
                 }
                 //drop of color
                 Button(action: {
-                    self.drop.toggle()
-                    withAnimation(.linear(duration: 1).delay(0)){
-                        self.expand.toggle()
-                    }
-                    withAnimation(.easeIn(duration: 1).delay(0.1)){
-                        self.background = lightPink
-                    }
-                    withAnimation(.easeIn(duration: 1).delay(0.1)){
-                        self.logoColor = darkPink
-                    }
+                    let delay = CGFloat(0)
+//                    self.drop.toggle()
+//                    withAnimation(.linear(duration: 1).delay(0)){
+//                        self.expand.toggle()
+//                    }
+//                    withAnimation(.easeIn(duration: 1).delay(0.1)){
+//                        self.background = lightPink
+//                    }
+//                    withAnimation(.easeIn(duration: 1).delay(0.1)){
+//                        self.logoColor = darkPink
+//                    }
 //                    withAnimation(.linear(duration: 1).delay(3)){
 //                        self.expand.toggle()
 //                    }
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.9 + delay) {
-//                        self.logoColor = darkPink
-//                    }
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 1 + delay) {
-//                        self.logoColor = darkGray
-//                    }
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.2 + delay) {
-//                        self.logoColor = darkPink
-//                    }
+//                    5 flickers
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3 + delay) {
+                        self.logoColor = darkPink
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4 + delay) {
+                        self.logoColor = darkGray
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.45 + delay) {
+                        self.logoColor = darkPink
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 + delay) {
+                        self.logoColor = darkGray
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.55 + delay) {
+                        self.logoColor = darkPink
+                    }
                     
                 }){
-                    Text("drop")
+                    Text("flicker")
                 }
                 
             }
@@ -237,6 +290,20 @@ struct CleanedUpAnimationView_Previews: PreviewProvider {
     static var previews: some View {
         CleanedUpAnimationView()
     }
+}
+
+struct Trapezoid: Shape {
+  @State var percent: Double
+  func path(in rect: CGRect) -> Path {
+    var path = Path()
+    let edge = rect.width * CGFloat(percent/100)
+    path.move(to: CGPoint(x: rect.minX + edge, y: rect.minY))
+    path.addLine(to: CGPoint(x: rect.maxX - edge, y: rect.minY ))
+    path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY ))
+    path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+    path.closeSubpath()
+    return path
+  }
 }
 
 struct loadingBarView: View {
