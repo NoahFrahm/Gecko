@@ -50,6 +50,7 @@ struct CleanedUpAnimationView: View {
     @State var blast = false
     
     @State var drop: Bool = false
+    @State var faintGlow = false
     @State var expand: Bool = false
     
     var body: some View {
@@ -139,19 +140,18 @@ struct CleanedUpAnimationView: View {
                         .foregroundColor(.clear)
                         .frame(width: logoSize*0.65, height: 553)
                     HStack{
-                    Trapezoid(percent: 41 )
-                        .fill(
-                            LinearGradient(
-                                colors: [lightPink, .black],
-                                startPoint: .top,
-                                endPoint: .bottom)
-                        )
-                        .frame(width: logoSize * 2, height: 300)
-                        .opacity(drop ? 1:0)
+                        Image(uiImage: UIImage(named: "reflection")!)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 500, height: 30)
+                            .opacity(faintGlow ? 1 : 0)
                         Rectangle()
                             .foregroundColor(.clear)
-                            .frame(width: 1, height: 1)
+                            .frame(width: 1, height: 2)
                     }
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .frame(width: 1, height: 80)
                 }
                 .frame(width: logoSize/3, height: 700)
             }
@@ -191,11 +191,18 @@ struct CleanedUpAnimationView: View {
 //                        self.logoColor = darkPink
                         
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {self.drop.toggle()
-                        
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay){
+                        self.drop.toggle()
+                        self.faintGlow.toggle()
                     }
                     withAnimation(.linear(duration: 0).delay(0 + delay)){
                         self.expand.toggle()
+                    }
+                    
+                    withAnimation(.easeIn(duration: 0.4).delay(1 + delay)){
+                        self.logoColor = darkPink
+                        self.background = lightPink
+//                        self.faintGlow.toggle()
                     }
 //                    withAnimation(.easeIn(duration: 1).delay(0.1 + delay)){
 //                        self.background = lightPink
@@ -244,9 +251,9 @@ struct CleanedUpAnimationView: View {
                 }) {
                     Text("flash")
                 }
-                //drop of color
+                //bring in the background and logo colors
                 Button(action: {
-                    let delay = CGFloat(0)
+                    _ = CGFloat(0)
 //                    self.drop.toggle()
 //                    withAnimation(.linear(duration: 1).delay(0)){
 //                        self.expand.toggle()
@@ -254,28 +261,30 @@ struct CleanedUpAnimationView: View {
 //                    withAnimation(.easeIn(duration: 1).delay(0.1)){
 //                        self.background = lightPink
 //                    }
-//                    withAnimation(.easeIn(duration: 1).delay(0.1)){
-//                        self.logoColor = darkPink
-//                    }
+                    withAnimation(.easeIn(duration: 1).delay(0.1)){
+                        self.logoColor = darkPink
+                        self.background = lightPink
+                        self.faintGlow.toggle()
+                    }
 //                    withAnimation(.linear(duration: 1).delay(3)){
 //                        self.expand.toggle()
 //                    }
 //                    5 flickers
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3 + delay) {
-                        self.logoColor = darkPink
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4 + delay) {
-                        self.logoColor = darkGray
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.45 + delay) {
-                        self.logoColor = darkPink
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 + delay) {
-                        self.logoColor = darkGray
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.55 + delay) {
-                        self.logoColor = darkPink
-                    }
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3 + delay) {
+//                        self.logoColor = darkPink
+//                    }
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4 + delay) {
+//                        self.logoColor = darkGray
+//                    }
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.45 + delay) {
+//                        self.logoColor = darkPink
+//                    }
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 + delay) {
+//                        self.logoColor = darkGray
+//                    }
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.55 + delay) {
+//                        self.logoColor = darkPink
+//                    }
                     
                 }){
                     Text("flicker")
@@ -292,6 +301,7 @@ struct CleanedUpAnimationView_Previews: PreviewProvider {
     }
 }
 
+
 struct Trapezoid: Shape {
   @State var percent: Double
   func path(in rect: CGRect) -> Path {
@@ -305,6 +315,7 @@ struct Trapezoid: Shape {
     return path
   }
 }
+
 
 struct loadingBarView: View {
     
@@ -367,3 +378,18 @@ struct TurnOffView: View {
         }
     }
 }
+
+
+
+//                    Trapezoid(percent: 41 )
+//                        .fill(
+//                            LinearGradient(
+//                                colors: [lightPink, .black],
+//                                startPoint: .top,
+//                                endPoint: .bottom)
+//                        )
+//                        .frame(width: logoSize * 2, height: 300)
+////                        .opacity(faintGlow ? 1:0)
+//                        Rectangle()
+//                            .foregroundColor(.clear)
+//                            .frame(width: 1, height: 1)
