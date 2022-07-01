@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		093F1676286F2334009EB96E /* CleanedUpAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093F1675286F2334009EB96E /* CleanedUpAnimationView.swift */; };
 		09A68A022833120B0072E9E2 /* lizardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A68A012833120B0072E9E2 /* lizardApp.swift */; };
 		09A68A042833120B0072E9E2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A68A032833120B0072E9E2 /* ContentView.swift */; };
 		09A68A062833120D0072E9E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09A68A052833120D0072E9E2 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		093F1675286F2334009EB96E /* CleanedUpAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanedUpAnimationView.swift; sourceTree = "<group>"; };
 		09A689FE2833120B0072E9E2 /* lizard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lizard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09A68A012833120B0072E9E2 /* lizardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lizardApp.swift; sourceTree = "<group>"; };
 		09A68A032833120B0072E9E2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				09D31DB928347688001DBD09 /* ExternalResources */,
 				09A68A072833120D0072E9E2 /* Preview Content */,
 				09B0422C286CD2F600C17153 /* AnimationView.swift */,
+				093F1675286F2334009EB96E /* CleanedUpAnimationView.swift */,
 			);
 			path = lizard;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				09A68A2E283316870072E9E2 /* TshirtView.swift in Sources */,
 				09B0422D286CD2F600C17153 /* AnimationView.swift in Sources */,
 				09A68A042833120B0072E9E2 /* ContentView.swift in Sources */,
+				093F1676286F2334009EB96E /* CleanedUpAnimationView.swift in Sources */,
 				09A68A2C283312A80072E9E2 /* ColorSchemes.swift in Sources */,
 				09D31DB828347679001DBD09 /* UIColor+extension.swift in Sources */,
 				09D31DB628347673001DBD09 /* UIBezierPath+Extension.swift in Sources */,

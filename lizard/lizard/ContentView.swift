@@ -12,21 +12,8 @@ struct ContentView: View {
     @State var fill = false
     
     var body: some View {
-        VStack(alignment: .leading){
-            HStack{
-                Rectangle()
-                    .frame(width: 300, height: 30)
-            }
-            Rectangle()
-                .frame(width: fill ? 300: 30, height: 30)
-            Button(action: {
-                withAnimation{
-                    fill.toggle()
-                }
-            }){
-                Text("load")
-            }
-        }
+        CleanedUpAnimationView()
+
 //        TabView{
 //        AnimationView()
 //            TshirtView()
