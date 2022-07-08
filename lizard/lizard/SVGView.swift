@@ -70,14 +70,7 @@ struct SVGView: View {
                             .stroke(Color(primary), lineWidth: 2)
 
             }
-                    .frame(width: 300, height: 300)
-//                Button(action: {
-//                    withAnimation(.easeIn(duration: 1)){
-//                        phoneFilled.toggle()
-//                    }
-//                }){
-//                    Text("phone")
-//                }
+            .frame(width: 300, height: 300)
             }
             .onChange(of: animate){ _ in
                 self.isFilled = false
@@ -87,14 +80,9 @@ struct SVGView: View {
                 withAnimation(.easeInOut(duration: 2.5)){
                     self.endAmount = 1
                 }
-                
-//                withAnimation(.easeIn(duration: 1).delay(2.5)){
-//                    self.phoneFilled = true
-//                }
                 withAnimation(.easeIn(duration: 1.5).delay(0.5)){
                     self.phoneFilled = true
                 }
-                
                 withAnimation(
                     Animation.easeInOut(duration: 3)
                 ){
@@ -105,10 +93,6 @@ struct SVGView: View {
                 withAnimation(.easeInOut(duration: 2.5)){
                     self.endAmount = 1
                 }
-                
-//                withAnimation(.easeIn(duration: 1).delay(2.5)){
-//                    self.phoneFilled = true
-//                }
                 withAnimation(.easeIn(duration: 1.5).delay(0.5)){
                     self.phoneFilled = true
                 }
@@ -132,31 +116,3 @@ struct SVGView_Previews: PreviewProvider {
         )
     }
 }
-
-
-//            ShapeView(bezier: .ctLogo1, pathBounds: pathBounds)
-//                .trim(from: 0, to: endAmount)
-//                .stroke(Color(primary), lineWidth: 2)
-//            ShapeView(bezier: .ctLogo2, pathBounds: pathBounds)
-//                .trim(from: 0, to: endAmount)
-//                .stroke(Color(secondary), lineWidth: 2)
-
-//            pink
-//            ShapeView(bezier: .finalHorns, pathBounds: pathBounds)
-//                .fill(Color(primary)).opacity(isFilled ? 1 : 0)
-//            ShapeView(bezier: .finalScreen, pathBounds: pathBounds)
-//                .fill(Color(secondary)).opacity(isFilled ? 1 : 0)
-//
-//            ShapeView(bezier: .finalHorns, pathBounds: pathBounds)
-//                        .trim(from: 0, to: endAmount)
-//                        .stroke(Color(primary), lineWidth: 2)
-//            ShapeView(bezier: .finalScreen, pathBounds: pathBounds)
-//                        .trim(from: 0, to: endAmount)
-//                        .stroke(Color(primary), lineWidth: 2)
-            
-            
-            
-//            ShapeView(bezier: .ctLogo1, pathBounds: pathBounds)
-//                .fill(Color(primary)).opacity(isFilled ? 1 : 0)
-//            ShapeView(bezier: .ctLogo2, pathBounds: pathBounds)
-//                .fill(Color(secondary)).opacity(isFilled ? 1 : 0)

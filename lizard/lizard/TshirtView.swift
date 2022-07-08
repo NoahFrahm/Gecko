@@ -13,34 +13,26 @@ struct TshirtView: View {
     @State var colorSchemes = myColorSchemes
     
     var body: some View {
-//        NavigationView{
-            VStack{
-//                HStack{
-//                    Spacer()
-//                    Text("create new color scheme!")
-//                    Image(systemName: "plus")
-//                }.padding([.trailing])
-                
-                Picker("Scheme", selection: $selectedColorScheme) {
-                    ForEach(colorSchemes, id: \.self) {current in
-                        Text(current.name)
-                        
-                    }
+        VStack{
+            Picker("Scheme", selection: $selectedColorScheme) {
+                ForEach(colorSchemes, id: \.self) {current in
+                    Text(current.name)
                 }
-                .pickerStyle(.segmented)
-                
-                pallet(selectedColorScheme: $selectedColorScheme)
-                
-                SVGView(
-                    animate: $selectedColorScheme,
-                    primary: $selectedColorScheme.primary,
-                    secondary: $selectedColorScheme.secondary,
-                    tertiary: $selectedColorScheme.tertiary
-                )
-                
-                Spacer()
-            }.ignoresSafeArea(edges: .bottom)
-//        }
+            }
+            .pickerStyle(.segmented)
+            
+            pallet(selectedColorScheme: $selectedColorScheme)
+            
+            SVGView(
+                animate: $selectedColorScheme,
+                primary: $selectedColorScheme.primary,
+                secondary: $selectedColorScheme.secondary,
+                tertiary: $selectedColorScheme.tertiary
+            )
+            
+            Spacer()
+        }
+//        .ignoresSafeArea(edges: .bottom)
     }
 }
 

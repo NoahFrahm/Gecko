@@ -31,14 +31,6 @@ struct CleanedUpAnimationView: View {
         .final_logo_horns,
     ])
     
-    let gradient = Gradient(
-            stops: [
-                .init(color: .green.opacity(0.4), location: 0),
-                .init(color: .green.opacity(0.5), location: 0.7),
-                .init(color: .green.opacity(0), location: 1),
-            ]
-        )
-    
     //vars for flash and swipe animation
     @State var crunch_height = false
     @State var crunch_width = false
@@ -47,8 +39,6 @@ struct CleanedUpAnimationView: View {
     @State var pushVal: CGFloat = CGFloat(0)
     @State var loadingBar: CGFloat = CGFloat(1)
     @State var showLoad = false
-    @State var blast = false
-    
     @State var drop: Bool = false
     @State var faintGlow = false
     @State var expand: Bool = false
@@ -155,65 +145,9 @@ struct CleanedUpAnimationView: View {
                 }
                 .frame(width: logoSize/3, height: 700)
             }
-            .ignoresSafeArea()
-            
-            
+            .ignoresSafeArea(edges: .top)
             
             HStack{
-                //this button animates the loading bar
-                Button(action: {
-                    let delay = CGFloat(0.9)
-//                    withAnimation(.easeIn(duration: 3)){
-//                        loadingBar = 34
-//                    }
-//                    withAnimation(.linear(duration: 1.5).delay(3)){
-//                        loadingBar = 52
-//                    }
-//                    withAnimation(.easeIn(duration: 0.5).delay(4.5)){
-//                        loadingBar = 76
-//                    }
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
-//                        blast = true
-//                        self.screenColor = lightPink
-//                        self.background =  lightPink
-//                        self.logoColor = darkPink
-//
-//                    }
-                    
-                    withAnimation(.easeIn(duration: 1)){
-                        loadingBar = 76
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
-                        self.showLoad = false
-//                        blast = true
-//                        self.screenColor = lightPink
-//                        self.background =  lightPink
-//                        self.logoColor = darkPink
-                        
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + delay){
-                        self.drop.toggle()
-                        self.faintGlow.toggle()
-                    }
-                    withAnimation(.linear(duration: 0).delay(0 + delay)){
-                        self.expand.toggle()
-                    }
-                    
-                    withAnimation(.easeIn(duration: 0.4).delay(1 + delay)){
-                        self.logoColor = darkPink
-                        self.background = lightPink
-//                        self.faintGlow.toggle()
-                    }
-//                    withAnimation(.easeIn(duration: 1).delay(0.1 + delay)){
-//                        self.background = lightPink
-//                    }
-//                    withAnimation(.easeIn(duration: 1).delay(0.1 + delay)){
-//                        self.logoColor = darkPink
-//                    }
-                    
-                }){
-                    Text("load")
-                }
                 //animates the swipe
                 Button(action: {
                     withAnimation(){
@@ -251,46 +185,42 @@ struct CleanedUpAnimationView: View {
                 }) {
                     Text("flash")
                 }
+                //this button animates the loading bar
+                Button(action: {
+                    let delay = CGFloat(0.9)
+                    
+                    withAnimation(.easeIn(duration: 1)){
+                        loadingBar = 76
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+                        self.showLoad = false
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delay){
+                        self.drop.toggle()
+                        self.faintGlow.toggle()
+                    }
+                    withAnimation(.linear(duration: 0).delay(0 + delay)){
+                        self.expand.toggle()
+                    }
+                    withAnimation(.easeIn(duration: 0.4).delay(1 + delay)){
+                        self.logoColor = darkPink
+                        self.background = lightPink
+                    }
+                }){
+                    Text("load")
+                }
                 //bring in the background and logo colors
                 Button(action: {
                     _ = CGFloat(0)
-//                    self.drop.toggle()
-//                    withAnimation(.linear(duration: 1).delay(0)){
-//                        self.expand.toggle()
-//                    }
-//                    withAnimation(.easeIn(duration: 1).delay(0.1)){
-//                        self.background = lightPink
-//                    }
                     withAnimation(.easeIn(duration: 1).delay(0.1)){
                         self.logoColor = darkPink
                         self.background = lightPink
                         self.faintGlow.toggle()
                     }
-//                    withAnimation(.linear(duration: 1).delay(3)){
-//                        self.expand.toggle()
-//                    }
-//                    5 flickers
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3 + delay) {
-//                        self.logoColor = darkPink
-//                    }
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4 + delay) {
-//                        self.logoColor = darkGray
-//                    }
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.45 + delay) {
-//                        self.logoColor = darkPink
-//                    }
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 + delay) {
-//                        self.logoColor = darkGray
-//                    }
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.55 + delay) {
-//                        self.logoColor = darkPink
-//                    }
-                    
                 }){
                     Text("flicker")
                 }
-                
-            }
+            }.padding(.bottom, 50)
         }
     }
 }
@@ -378,18 +308,3 @@ struct TurnOffView: View {
         }
     }
 }
-
-
-
-//                    Trapezoid(percent: 41 )
-//                        .fill(
-//                            LinearGradient(
-//                                colors: [lightPink, .black],
-//                                startPoint: .top,
-//                                endPoint: .bottom)
-//                        )
-//                        .frame(width: logoSize * 2, height: 300)
-////                        .opacity(faintGlow ? 1:0)
-//                        Rectangle()
-//                            .foregroundColor(.clear)
-//                            .frame(width: 1, height: 1)

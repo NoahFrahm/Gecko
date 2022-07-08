@@ -12,19 +12,17 @@ struct ContentView: View {
     @State var fill = false
     
     var body: some View {
-        CleanedUpAnimationView()
 
-//        TabView{
-//        AnimationView()
-//            TshirtView()
-//                .tabItem {
-//                    Label("Menu", systemImage: "list.dash")
-//                }
-//            SVGView()
-//                .tabItem {
-//                    Label("SVG", systemImage: "list.dash")
-//                }
-//        }
+        TabView{
+            TshirtView()
+                .tabItem {
+                    Label("Menu", systemImage: "list.dash")
+                }
+            CleanedUpAnimationView()
+                .tabItem {
+                    Label("SVG", systemImage: "list.dash")
+                }
+        }
     }
 }
 
