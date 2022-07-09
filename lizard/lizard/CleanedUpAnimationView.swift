@@ -60,8 +60,8 @@ struct CleanedUpAnimationView: View {
                             Rectangle()
                                 .foregroundColor(.clear)
                                 .frame(width: 88, height: 20)
-                            screen(backCol: screenColor)
-                            screen(backCol: screenColor)
+                            screen2(backCol: screenColor)
+                            screen1(backCol: screenColor)
                             Rectangle()
                                 .foregroundColor(.clear)
                                 .frame(width: pushVal, height: 20)
@@ -232,6 +232,161 @@ struct CleanedUpAnimationView_Previews: PreviewProvider {
 }
 
 
+struct screen: View {
+    
+    var appSize: CGFloat = CGFloat((300/3)/4)
+    var appRounding: CGFloat = CGFloat(8)
+    var logoSize: CGFloat = CGFloat(300)
+    var appSpacing: CGFloat = CGFloat(5)
+    var backCol: Color = .blue
+
+    var body: some View {
+        ZStack{
+            VStack{
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(width: 30, height: 8)
+                RoundedRectangle(cornerRadius: 0)
+                    .foregroundColor(backCol)
+                    .frame(width: (logoSize)/3, height: (logoSize)*0.75)
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(width: 30, height: 39)
+            }
+            .frame(width: 300, height: 300)
+            VStack(){
+                ForEach(0..<3){ _ in
+                    HStack(spacing: appSpacing){
+                        ForEach(0..<3){ _ in
+                            AppIconView(appSize: appSize, appRounding: appRounding)
+                        }
+                    }
+                    .padding([.trailing, .leading])
+                }
+                HStack(spacing: appSpacing){
+                    ForEach(0..<2){ _ in
+                        AppIconView(appSize: appSize, appRounding: appRounding)
+                    }
+                    HStack(spacing: appSpacing){
+                        AppIconView(appSize: appSize, appRounding: appRounding, appColor: .clear)
+                    }
+                    
+                }
+                .padding([.trailing, .leading])
+            }
+            .padding([.top, .bottom], 20)
+            .frame(width: (logoSize)/3, height: (logoSize)*0.8, alignment: .top)
+            
+        }
+        .frame(width: (logoSize)/3, height: (logoSize)*0.8)
+    }
+
+}
+
+
+struct screen1: View {
+    
+    var appSize: CGFloat = CGFloat((300/3)/4)
+    var appRounding: CGFloat = CGFloat(8)
+    var logoSize: CGFloat = CGFloat(300)
+    var appSpacing: CGFloat = CGFloat(5)
+    var backCol: Color = .blue
+
+    var body: some View {
+        ZStack{
+            VStack{
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(width: 30, height: 8)
+                RoundedRectangle(cornerRadius: 0)
+                    .foregroundColor(backCol)
+                    .frame(width: (logoSize)/3, height: (logoSize)*0.75)
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(width: 30, height: 39)
+            }
+            .frame(width: 300, height: 300)
+            VStack(){
+                HStack(spacing: 5){
+                    AppIconView(appSize: 55, appRounding: appRounding)
+                        .padding(.leading, 0)
+                    VStack{
+                        AppIconView(appSize: appSize, appRounding: appRounding)
+                        AppIconView(appSize: appSize, appRounding: appRounding)
+                    }
+                }
+                
+                ForEach(0..<2){ _ in
+                HStack(spacing: appSpacing){
+                    ForEach(0..<3){ _ in
+                        AppIconView(appSize: appSize, appRounding: appRounding)
+                    }
+                }
+                    .padding([.trailing, .leading])
+                }
+            }
+            .padding([.top, .bottom], 20)
+            .frame(width: (logoSize)/3, height: (logoSize)*0.8, alignment: .top)
+            
+        }
+        .frame(width: (logoSize)/3, height: (logoSize)*0.8)
+    }
+
+}
+
+
+struct screen2: View {
+    
+    var appSize: CGFloat = CGFloat((300/3)/4)
+    var appRounding: CGFloat = CGFloat(8)
+    var logoSize: CGFloat = CGFloat(300)
+    var appSpacing: CGFloat = CGFloat(5)
+    var backCol: Color = .blue
+
+    var body: some View {
+        ZStack{
+            VStack{
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(width: 30, height: 8)
+                RoundedRectangle(cornerRadius: 0)
+                    .foregroundColor(backCol)
+                    .frame(width: (logoSize)/3, height: (logoSize)*0.75)
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(width: 30, height: 39)
+            }
+            .frame(width: 300, height: 300)
+            VStack(){
+                HStack(spacing: 5){
+                    AppIconView(appSize: 55, appWidth: 85, appRounding: appRounding)
+                        .padding(.leading, 0)
+                }
+                HStack(spacing: 5){
+                    AppIconView(appSize: 55, appRounding: appRounding)
+                        .padding(.leading, 0)
+                    VStack(spacing: 5){
+                        AppIconView(appSize: appSize, appRounding: appRounding)
+                        AppIconView(appSize: appSize, appRounding: appRounding)
+                    }
+                }
+                
+                HStack(spacing: appSpacing){
+                    ForEach(0..<3){ _ in
+                        AppIconView(appSize: appSize, appRounding: appRounding)
+                    }
+                }
+            }
+            .padding([.top, .bottom], 20)
+            .frame(width: (logoSize)/3, height: (logoSize)*0.8, alignment: .top)
+            
+        }
+        .frame(width: (logoSize)/3, height: (logoSize)*0.8)
+    }
+
+}
+
+
 struct Trapezoid: Shape {
   @State var percent: Double
   func path(in rect: CGRect) -> Path {
@@ -306,5 +461,20 @@ struct TurnOffView: View {
                 .frame(width: logoSize, height: logoSize*0.75)
             
         }
+    }
+}
+
+
+struct AppIconView: View {
+    
+    var appSize: CGFloat
+    var appWidth: CGFloat = -1.0
+    var appRounding: CGFloat
+    var appColor: Color = Color(red: 83/255, green: 64/255, blue: 177/255)
+    
+    var body: some View {
+        RoundedRectangle(cornerRadius: appRounding)
+            .foregroundColor(appColor)
+            .frame(width: appWidth < 0 ? appSize: appWidth, height: appSize)
     }
 }
