@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CleanedUpAnimationView: View {
+//    scales to ipad if we increase blocking sizes for rect width 330 and 340
     
     var appSize: CGFloat = CGFloat((300/3)/4)
     var appRounding: CGFloat = CGFloat(8)
@@ -22,6 +23,7 @@ struct CleanedUpAnimationView: View {
     var screenWidth = UIScreen.main.bounds.width
     var screenHeight = UIScreen.main.bounds.height
     
+//    currently meant for size 300
     @State var logoSize: CGFloat = CGFloat(300)
     @State var background: Color = Color(red: 148/255, green: 131/255, blue: 249/255)
     @State var screenColor: Color = Color(red: 148/255, green: 131/255, blue: 249/255)
@@ -60,8 +62,8 @@ struct CleanedUpAnimationView: View {
                             Rectangle()
                                 .foregroundColor(.clear)
                                 .frame(width: 88, height: 20)
-                            screen2(backCol: screenColor)
                             screen1(backCol: screenColor)
+                            screen2(backCol: screenColor)
                             Rectangle()
                                 .foregroundColor(.clear)
                                 .frame(width: pushVal, height: 20)
@@ -225,6 +227,7 @@ struct CleanedUpAnimationView: View {
     }
 }
 
+
 struct CleanedUpAnimationView_Previews: PreviewProvider {
     static var previews: some View {
         CleanedUpAnimationView()
@@ -291,7 +294,10 @@ struct screen1: View {
     var logoSize: CGFloat = CGFloat(300)
     var appSpacing: CGFloat = CGFloat(5)
     var backCol: Color = .blue
-
+    var padding = 20
+    var pushdown: CGFloat = CGFloat(1)
+    
+    
     var body: some View {
         ZStack{
             VStack{
@@ -308,9 +314,9 @@ struct screen1: View {
             .frame(width: 300, height: 300)
             VStack(){
                 HStack(spacing: 5){
-                    AppIconView(appSize: 55, appRounding: appRounding)
+                    AppIconView(appSize: appSize * 2 + appSpacing, appRounding: appRounding)
                         .padding(.leading, 0)
-                    VStack{
+                    VStack(spacing: appSpacing){
                         AppIconView(appSize: appSize, appRounding: appRounding)
                         AppIconView(appSize: appSize, appRounding: appRounding)
                     }
@@ -342,6 +348,7 @@ struct screen2: View {
     var logoSize: CGFloat = CGFloat(300)
     var appSpacing: CGFloat = CGFloat(5)
     var backCol: Color = .blue
+    var padding = 20
 
     var body: some View {
         ZStack{
@@ -358,24 +365,49 @@ struct screen2: View {
             }
             .frame(width: 300, height: 300)
             VStack(){
-                HStack(spacing: 5){
-                    AppIconView(appSize: 55, appWidth: 85, appRounding: appRounding)
-                        .padding(.leading, 0)
-                }
-                HStack(spacing: 5){
-                    AppIconView(appSize: 55, appRounding: appRounding)
-                        .padding(.leading, 0)
-                    VStack(spacing: 5){
-                        AppIconView(appSize: appSize, appRounding: appRounding)
-                        AppIconView(appSize: appSize, appRounding: appRounding)
-                    }
-                }
-                
                 HStack(spacing: appSpacing){
                     ForEach(0..<3){ _ in
                         AppIconView(appSize: appSize, appRounding: appRounding)
                     }
                 }
+                HStack(spacing: appSpacing){
+                    ForEach(0..<3){ _ in
+                        AppIconView(appSize: appSize, appRounding: appRounding)
+                    }
+                }
+//                HStack(spacing: appSpacing){
+//                    ForEach(0..<3){ _ in
+//                        AppIconView(appSize: appSize, appRounding: appRounding)
+//                    }
+//                }
+
+                HStack(spacing: 5){
+                    VStack(spacing: 5){
+                        AppIconView(appSize: appSize, appRounding: appRounding)
+                        AppIconView(appSize: appSize, appRounding: appRounding)
+                    }
+                    AppIconView(appSize: appSize * 2 + appSpacing, appRounding: appRounding)
+                        .padding(.leading, 0)
+                }
+//                HStack(spacing: appSpacing){
+//                    ForEach(0..<3){ _ in
+//                        AppIconView(appSize: appSize, appRounding: appRounding)
+//                    }
+//                }
+                
+//                HStack(spacing: 5){
+//                    AppIconView(appSize: 55, appWidth: 85, appRounding: appRounding)
+//                        .padding(.leading, 0)
+//                }
+                
+//                HStack(spacing: appSpacing){
+//                    ForEach(0..<1){ _ in
+//                        AppIconView(appSize: appSize, appRounding: appRounding)
+//                    }
+//                    ForEach(0..<2){ _ in
+//                        AppIconView(appSize: appSize, appRounding: appRounding, appColor: .clear)
+//                    }
+//                }
             }
             .padding([.top, .bottom], 20)
             .frame(width: (logoSize)/3, height: (logoSize)*0.8, alignment: .top)
@@ -385,6 +417,30 @@ struct screen2: View {
     }
 
 }
+
+////square widget with apps to right
+//HStack(spacing: 5){
+//    AppIconView(appSize: 55, appRounding: appRounding)
+//        .padding(.leading, 0)
+//    VStack(spacing: 5){
+//        AppIconView(appSize: appSize, appRounding: appRounding)
+//        AppIconView(appSize: appSize, appRounding: appRounding)
+//    }
+//}
+
+
+////triple app row
+//HStack(spacing: appSpacing){
+//    ForEach(0..<3){ _ in
+//        AppIconView(appSize: appSize, appRounding: appRounding)
+//    }
+//}
+
+////                rectangle widget
+//                HStack(spacing: 5){
+//                    AppIconView(appSize: 55, appWidth: 85, appRounding: appRounding)
+//                        .padding(.leading, 0)
+//                }
 
 
 struct Trapezoid: Shape {
@@ -440,6 +496,7 @@ struct TurnOffView: View {
     @Binding var crunch_height: Bool
     @Binding var crunch_width: Bool
     @Binding var blackout: Bool
+    var bonus: CGFloat = CGFloat(0)
     
     var flashColor: Color = .white
     var backColor: Color = .black
@@ -449,7 +506,7 @@ struct TurnOffView: View {
             //full black
             RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(backColor)
-                .frame(width: logoSize, height: logoSize*0.75)
+                .frame(width: logoSize + bonus, height: logoSize*0.75)
                 .opacity(flash ? 1 : 0)
             //full white
             RoundedRectangle(cornerRadius: 20)
